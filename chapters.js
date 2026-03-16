@@ -1,4 +1,4 @@
-const chapters = [
+const chapters=[
 
 {
 id:1,
@@ -7,10 +7,9 @@ words:[
 "ik",
 "jij",
 "hij",
-"naam",
 "hallo",
 "doei",
-"persoon"
+"naam"
 ]
 },
 
@@ -20,8 +19,7 @@ title:"Plaatsen",
 words:[
 "huis",
 "stad",
-"school",
-"kamer"
+"school"
 ]
 },
 
@@ -32,8 +30,7 @@ words:[
 "gaan",
 "komen",
 "zien",
-"eten",
-"lopen"
+"eten"
 ]
 }
 
