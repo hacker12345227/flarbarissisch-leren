@@ -78,7 +78,7 @@
 
 <script>
 
-/* wachten tot dictionary geladen is */
+/* wacht tot dictionary geladen is */
 
 function waitForDictionary(){
 
@@ -94,50 +94,56 @@ loadLesson()
 
 }
 
-/* laad les */
-
 function loadLesson(){
 
-const params = new URLSearchParams(location.search)
+const params = new URLSearchParams(window.location.search)
 
 const chapterId = params.get("chapter")
 
-if(!chapterId) return
+if(!chapterId){
 
-const chapter = getChapter(chapterId)
+document.getElementById("lessonTitle").innerText =
+"Geen hoofdstuk geselecteerd"
 
-if(!chapter) return
-
-const title = document.getElementById("lessonTitle")
-
-if(title){
-
-title.innerText =
-"Hoofdstuk " + chapter.id + " – " + chapter.title
+return
 
 }
 
-const table = document.getElementById("lessonWords")
+const chapter = chapters.find(c => c.id == chapterId)
 
-if(!table) return
+if(!chapter){
+
+document.getElementById("lessonTitle").innerText =
+"Hoofdstuk niet gevonden"
+
+return
+
+}
+
+document.getElementById("lessonTitle").innerText =
+"Hoofdstuk " + chapter.id + " – " + chapter.title
+
+const table = document.getElementById("lessonWords")
 
 table.innerHTML = ""
 
 chapter.words.forEach(word => {
 
-if(!dictionary[word]) return
+const flar = dictionary[word]
 
-const tr = document.createElement("tr")
+if(!flar) return
 
-tr.innerHTML = `
+const row = document.createElement("tr")
+
+row.innerHTML = `
 
 <td>${word}</td>
 
-<td>${dictionary[word]}</td>
+<td>${flar}</td>
 
 <td>
 <button class="icon-btn"
-onclick="speak('${dictionary[word]}')">
+onclick="speak('${flar}')">
 🔊
 </button>
 </td>
@@ -151,18 +157,15 @@ onclick="markLearned('${word}')">
 
 `
 
-table.appendChild(tr)
+table.appendChild(row)
 
 })
 
 }
-
-/* start */
 
 waitForDictionary()
 
 </script>
 
 </body>
-
 </html>
