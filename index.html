@@ -2,71 +2,87 @@
 <html lang="nl">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Leer Flarbarissisch</title>
 
-<link rel="icon" href="favicon.png">
-
-<meta property="og:title" content="Leer Flarbarissisch">
-<meta property="og:image" content="banner.png">
-
 <link rel="stylesheet" href="css/style.css">
-
+<link rel="icon" href="favicon.png">
 </head>
 
 <body>
 
-<header>
+<div class="page-shell">
 
-<h1>📚 Leer Flarbarissisch</h1>
+<header class="topbar">
 
-<nav>
+<div class="brand">
+<div class="brand-badge">📚</div>
 
-<a href="/">Home</a>
-<a href="hoofdstukken/">Hoofdstukken</a>
-<a href="flashcards/">Flashcards</a>
-<a href="quiz/">Quiz</a>
-<a href="grammatica/">Grammatica</a>
+<div>
+<h1>Leer Flarbarissisch</h1>
+<p>Taal leren met hoofdstukken</p>
+</div>
+</div>
 
+<nav class="nav">
+<a class="nav-link active" href="/">Home</a>
+<a class="nav-link" href="hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link" href="flashcards/">Flashcards</a>
+<a class="nav-link" href="quiz/">Quiz</a>
+<a class="nav-link" href="grammatica/">Grammatica</a>
 </nav>
 
 </header>
 
-<main>
+<main class="container">
 
-<section class="card">
+<section class="hero card">
 
-<h2>Welkom</h2>
+<div class="hero-content">
+
+<h2>Leer Flarbarissisch</h2>
 
 <p>
-Leer Flarbarissisch met lessen, flashcards en quizzen.
+Leer woorden met hoofdstukken, flashcards en quizzen.
 </p>
 
-</section>
+<div class="hero-actions">
 
-<section class="card">
+<a class="primary-btn" href="hoofdstukken/">Start lessen</a>
+<a class="secondary-btn" href="quiz/">Doe een quiz</a>
 
-<h2>Voortgang</h2>
+</div>
 
-<p>🔥 Streak: <span id="streak">0</span></p>
-<p>📚 Geleerde woorden: <span id="learned">0</span></p>
-<p>🧠 Quiz score: <span id="quizScore">0</span></p>
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<span class="stat-label">Streak</span>
+<span class="stat-value" id="streak">0</span>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">Geleerd</span>
+<span class="stat-value" id="learned">0</span>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">Quiz</span>
+<span class="stat-value" id="quizScore">0</span>
+</div>
+
+</div>
 
 </section>
 
 </main>
 
-<footer>
-
-<p>Flarbarissisch learning project</p>
-
-</footer>
+</div>
 
 <script src="js/script.js"></script>
 
 </body>
-
 </html>
