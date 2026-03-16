@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
-
-<meta charset="UTF-8">
-<title>Woorden</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Woorden | Leer Flarbarissisch</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">📖</div>
+        <div>
+          <h1>Woordenlijst</h1>
+          <p>Zoek in alle woorden uit de dictionary</p>
+        </div>
+      </div>
 
-<h1>📖 Woordenlijst</h1>
+      <nav class="nav">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./woorden.html" class="nav-link active">Woorden</a>
+        <a href="./flashcards.html" class="nav-link">Flashcards</a>
+        <a href="./quiz.html" class="nav-link">Quiz</a>
+        <a href="./grammatica.html" class="nav-link">Grammatica</a>
+      </nav>
+    </header>
 
-<input id="search" placeholder="zoek woord">
+    <main class="container">
+      <section class="card">
+        <div class="toolbar-row">
+          <input id="searchInput" class="search-input" type="text" placeholder="Zoek Nederlands of Flarbarissisch..." />
+          <button id="shuffleWordsBtn" class="secondary-btn" type="button">Shuffle</button>
+        </div>
 
-<table id="wordTable">
+        <div class="table-wrap">
+          <table class="word-table">
+            <thead>
+              <tr>
+                <th>Nederlands</th>
+                <th>Flarbarissisch</th>
+                <th>Audio</th>
+              </tr>
+            </thead>
+            <tbody id="wordTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
 
-<tr>
-<th>Nederlands</th>
-<th>Flarbarissisch</th>
-</tr>
-
-</table>
-
-<script src="script.js"></script>
-
+  <script src="./script.js"></script>
 </body>
 </html>
