@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
-
-<meta charset="UTF-8">
-<title>Grammatica</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grammatica | Leer Flarbarissisch</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">📘</div>
+        <div>
+          <h1>Grammatica</h1>
+          <p>Zelfde structuur als Nederlands</p>
+        </div>
+      </div>
 
-<h1>📘 Grammatica</h1>
+      <nav class="nav">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./woorden.html" class="nav-link">Woorden</a>
+        <a href="./flashcards.html" class="nav-link">Flashcards</a>
+        <a href="./quiz.html" class="nav-link">Quiz</a>
+        <a href="./grammatica.html" class="nav-link active">Grammatica</a>
+      </nav>
+    </header>
 
-<h2>Zinsopbouw</h2>
+    <main class="container">
+      <section class="card prose-card">
+        <h2>Zinsopbouw</h2>
+        <p>
+          Flarbarissisch gebruikt dezelfde grammaticale volgorde als Nederlands:
+          <strong>onderwerp + werkwoord + rest</strong>.
+        </p>
 
-<p>
-De zinsopbouw is hetzelfde als Nederlands:
-</p>
+        <div class="example-box">
+          <p><strong>Nederlands:</strong> Ik ga naar huis.</p>
+          <p><strong>Flarbarissisch:</strong> Zlu blar naar flaren.</p>
+        </div>
 
-<p>
-Onderwerp + Werkwoord + Rest
-</p>
+        <h2>Werkwoorden</h2>
+        <p>
+          Werkwoorden gedragen zich hetzelfde als in het Nederlands. Je leert dus vooral
+          nieuwe woorden, niet een compleet nieuwe grammatica.
+        </p>
 
-<h3>Voorbeeld</h3>
+        <h2>Leerstrategie</h2>
+        <ul class="pretty-list">
+          <li>Leer eerst de meest gebruikte woorden met flashcards.</li>
+          <li>Doe daarna dagelijks een quiz om je streak te behouden.</li>
+          <li>Gebruik de audio-knoppen om de uitspraak te oefenen.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
 
-<p>Nederlands:</p>
-<p><b>Ik ga naar huis</b></p>
-
-<p>Flarbarissisch:</p>
-<p><b>Zlu blar naar flaren</b></p>
-
-<h2>Werkwoorden</h2>
-
-<p>
-Werkwoorden vervoegen net als Nederlands.
-</p>
-
+  <script src="./script.js"></script>
 </body>
 </html>
