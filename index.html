@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,12 +8,18 @@
 
 <title>Leer Flarbarissisch</title>
 
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Leer Flarbarissisch met hoofdstukken, quizzen en flashcards.">
 
+<!-- favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+
+<!-- discord / embed -->
 <meta property="og:title" content="Leer Flarbarissisch">
+<meta property="og:description" content="Leer Flarbarissisch met lessen en quizzen">
 <meta property="og:image" content="banner.png">
+<meta property="og:type" content="website">
 
-<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -24,10 +31,11 @@
 
 <nav>
 
-<a href="hoofdstukken.html">Hoofdstukken</a>
-<a href="flashcards.html">Flashcards</a>
-<a href="quiz.html">Quiz</a>
-<a href="grammatica.html">Grammatica</a>
+<a href="/">Home</a>
+<a href="hoofdstukken/">Hoofdstukken</a>
+<a href="flashcards/">Flashcards</a>
+<a href="quiz/">Quiz</a>
+<a href="grammatica/">Grammatica</a>
 
 </nav>
 
@@ -35,26 +43,53 @@
 
 <main>
 
-<div class="card">
+<section class="card">
 
 <h2>Welkom</h2>
 
 <p>
-Leer Flarbarissisch met hoofdstukken, flashcards en quizzen.
+Op deze website kun je Flarbarissisch leren met hoofdstukken,
+flashcards en quizzen.
 </p>
 
-<div class="stats">
+</section>
 
-<p>🔥 Streak: <span id="streak">0</span></p>
-<p>📖 Geleerd: <span id="learned">0</span></p>
+<section class="card stats">
+
+<h2>Voortgang</h2>
+
+<p>🔥 Streak: <span id="streak">0</span> dagen</p>
+
+<p>📖 Geleerde woorden: <span id="learned">0</span></p>
+
+<p>🧠 Quiz score: <span id="quizScore">0</span></p>
+
+</section>
+
+<section class="card">
+
+<h2>Snel starten</h2>
+
+<div class="buttons">
+
+<a class="button" href="hoofdstukken/">📚 Start lessen</a>
+<a class="button" href="flashcards/">🗂 Flashcards</a>
+<a class="button" href="quiz/">🧠 Quiz</a>
 
 </div>
 
-</div>
+</section>
 
 </main>
+
+<footer>
+
+<p>Flarbarissisch learning project</p>
+
+</footer>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
