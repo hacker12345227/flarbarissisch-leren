@@ -1,74 +1,47 @@
-<!DOCTYPE html>
-<html lang="nl">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Les</title>
-
-<link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../favicon.png">
-
-</head>
-
-<body>
-
-<header>
-
-<h1 id="lessonTitle">Les</h1>
-
-<nav>
-
-<a href="../">Home</a>
-<a href="../hoofdstukken/">Hoofdstukken</a>
-<a href="../flashcards/">Flashcards</a>
-<a href="../quiz/">Quiz</a>
-<a href="../grammatica/">Grammatica</a>
-
-</nav>
-
-</header>
-
-<main>
-
-<table class="lessonTable">
-
-<tr>
-<th>Nederlands</th>
-<th>Flarbarissisch</th>
-<th>Audio</th>
-<th>Geleerd</th>
-</tr>
-
-<tbody id="lessonWords"></tbody>
-
-</table>
-
-</main>
-
 <script src="../js/chapters.js"></script>
 <script src="../js/script.js"></script>
 
 <script>
 
+/* wacht tot dictionary geladen is */
+
+function waitForDictionary(){
+
+if(!window.entries || entries.length === 0){
+
+setTimeout(waitForDictionary,100)
+
+return
+
+}
+
+loadLesson()
+
+}
+
+function loadLesson(){
+
 const params = new URLSearchParams(location.search)
 
 const chapterId = params.get("chapter")
 
-const chapter = chapters.find(c => c.id == chapterId)
+if(!chapterId) return
+
+const chapter = getChapter(chapterId)
+
+if(!chapter) return
 
 const table = document.getElementById("lessonWords")
 
-if(chapter){
+const title = document.getElementById("lessonTitle")
 
-document.getElementById("lessonTitle").innerText =
-"Hoofdstuk " + chapter.id + " – " + chapter.title
+if(title){
+title.innerText = "Hoofdstuk " + chapter.id + " – " + chapter.title
+}
 
 chapter.words.forEach(word => {
 
-if(dictionary[word]){
+if(!dictionary[word]) return
 
 const tr = document.createElement("tr")
 
@@ -94,11 +67,11 @@ tr.innerHTML = `
 
 table.appendChild(tr)
 
-}
-
 })
 
 }
+
+/* markeer woord als geleerd */
 
 function markLearned(word){
 
@@ -112,10 +85,12 @@ localStorage.setItem("learnedWords", JSON.stringify(learned))
 
 }
 
+updateStats()
+
 }
 
+/* start */
+
+waitForDictionary()
+
 </script>
-
-</body>
-
-</html>
