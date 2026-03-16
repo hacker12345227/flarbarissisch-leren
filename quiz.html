@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
-
-<meta charset="UTF-8">
-<title>Quiz</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz | Leer Flarbarissisch</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🧠</div>
+        <div>
+          <h1>Quiz</h1>
+          <p>Meerkeuze en automatische volgende vraag</p>
+        </div>
+      </div>
 
-<h1>🧠 Quiz</h1>
+      <nav class="nav">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./woorden.html" class="nav-link">Woorden</a>
+        <a href="./flashcards.html" class="nav-link">Flashcards</a>
+        <a href="./quiz.html" class="nav-link active">Quiz</a>
+        <a href="./grammatica.html" class="nav-link">Grammatica</a>
+      </nav>
+    </header>
 
-<p id="question"></p>
+    <main class="container">
+      <section class="card quiz-card">
+        <div class="quiz-top">
+          <span class="mini-stat" id="quizProgress">Vraag 0</span>
+          <span class="mini-stat" id="quizScore">0 goed</span>
+        </div>
 
-<div id="answers"></div>
+        <h2 id="quizQuestion">Laden...</h2>
 
-<p id="result"></p>
+        <div id="quizAnswers" class="answers-grid"></div>
 
-<script src="script.js"></script>
+        <p id="quizFeedback" class="quiz-feedback"></p>
+      </section>
+    </main>
+  </div>
 
+  <script src="./script.js"></script>
 </body>
 </html>
