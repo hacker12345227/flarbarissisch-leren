@@ -50,7 +50,7 @@ function updateStats(){
 
 const streak = localStorage.getItem("streak") || 0
 const learned = JSON.parse(localStorage.getItem("learnedWords") || "[]").length
-const quiz = localStorage.getItem("quizScore") || 0
+const quizScore = localStorage.getItem("quizScore") || 0
 
 const streakEl = document.getElementById("streak")
 const learnedEl = document.getElementById("learned")
@@ -58,7 +58,7 @@ const quizEl = document.getElementById("quizScore")
 
 if(streakEl) streakEl.innerText = streak
 if(learnedEl) learnedEl.innerText = learned
-if(quizEl) quizEl.innerText = quiz
+if(quizEl) quizEl.innerText = quizScore
 
 }
 
@@ -109,29 +109,31 @@ function showCard(){
 const front = document.getElementById("front")
 const back = document.getElementById("back")
 
+if(!front || !back) return
+
 const [nl, flar] = entries[flashIndex]
 
 currentWord = nl
 currentFlar = flar
 
-if(front) front.innerText = nl
-if(back) back.innerText = ""
+front.innerText = nl
+back.innerText = ""
 
 }
 
 function flipCard(){
 
+const card = document.getElementById("flashcard")
+
+if(!card) return
+
+card.classList.toggle("is-flipped")
+
 const back = document.getElementById("back")
 
-if(!back) return
-
-if(back.innerText === ""){
+if(back && back.innerText === ""){
 
 back.innerText = currentFlar
-
-}else{
-
-back.innerText = ""
 
 }
 
@@ -147,13 +149,25 @@ flashIndex = 0
 
 }
 
+const card = document.getElementById("flashcard")
+
+if(card){
+
+card.classList.remove("is-flipped")
+
+}
+
 showCard()
 
 }
 
 function speakWord(){
 
+if(currentFlar){
+
 speak(currentFlar)
+
+}
 
 }
 
@@ -187,7 +201,11 @@ const question = document.getElementById("question")
 const answers = document.getElementById("answers")
 const result = document.getElementById("result")
 
-if(question) question.innerText = `Wat betekent "${flar}"?`
+if(question){
+
+question.innerText = `Wat betekent "${flar}"?`
+
+}
 
 if(!answers) return
 
@@ -236,6 +254,26 @@ setTimeout(nextQuestion,1000)
 answers.appendChild(btn)
 
 })
+
+}
+
+/* ---------------- */
+/* LES PAGINA */
+/* ---------------- */
+
+function markLearned(word){
+
+let learned = JSON.parse(localStorage.getItem("learnedWords") || "[]")
+
+if(!learned.includes(word)){
+
+learned.push(word)
+
+localStorage.setItem("learnedWords", JSON.stringify(learned))
+
+}
+
+updateStats()
 
 }
 
