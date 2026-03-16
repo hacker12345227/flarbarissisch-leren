@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Hoofdstukken</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Hoofdstukken</h1>
+
+<nav>
+
+<a href="../">Home</a>
+<a href="../hoofdstukken/">Hoofdstukken</a>
+<a href="../flashcards/">Flashcards</a>
+<a href="../quiz/">Quiz</a>
+<a href="../grammatica/">Grammatica</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<div id="chaptersContainer" class="grid"></div>
+
+</main>
+
+<script src="../js/chapters.js"></script>
+
+<script>
+
+const container = document.getElementById("chaptersContainer")
+
+chapters.forEach(ch => {
+
+const card = document.createElement("div")
+
+card.className = "chapterCard"
+
+card.innerHTML = `
+
+<h2>Hoofdstuk ${ch.id}</h2>
+
+<h3>${ch.title}</h3>
+
+<p>${ch.description}</p>
+
+<p>${ch.words.length} woorden</p>
+
+<a class="startBtn" href="../les/?chapter=${ch.id}">
+Start les →
+</a>
+
+`
+
+container.appendChild(card)
+
+})
+
+</script>
+
+</body>
+
+</html>
