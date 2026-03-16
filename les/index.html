@@ -1,31 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Les</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
 
 </head>
 
 <body>
 
-<h1 id="title"></h1>
+<header>
 
-<table id="lessonTable">
+<h1 id="lessonTitle">Les</h1>
+
+<nav>
+
+<a href="../">Home</a>
+<a href="../hoofdstukken/">Hoofdstukken</a>
+<a href="../flashcards/">Flashcards</a>
+<a href="../quiz/">Quiz</a>
+<a href="../grammatica/">Grammatica</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<table class="lessonTable">
 
 <tr>
 <th>Nederlands</th>
 <th>Flarbarissisch</th>
 <th>Audio</th>
+<th>Geleerd</th>
 </tr>
+
+<tbody id="lessonWords"></tbody>
 
 </table>
 
-<script src="chapters.js"></script>
-<script src="script.js"></script>
+</main>
+
+<script src="../js/chapters.js"></script>
+<script src="../js/script.js"></script>
+
+<script>
+
+const params = new URLSearchParams(location.search)
+
+const chapterId = params.get("chapter")
+
+const chapter = chapters.find(c => c.id == chapterId)
+
+const table = document.getElementById("lessonWords")
+
+if(chapter){
+
+document.getElementById("lessonTitle").innerText =
+"Hoofdstuk " + chapter.id + " – " + chapter.title
+
+chapter.words.forEach(word => {
+
+if(dictionary[word]){
+
+const tr = document.createElement("tr")
+
+tr.innerHTML = `
+
+<td>${word}</td>
+
+<td>${dictionary[word]}</td>
+
+<td>
+<button onclick="speak('${dictionary[word]}')">
+🔊
+</button>
+</td>
+
+<td>
+<button onclick="markLearned('${word}')">
+✔
+</button>
+</td>
+
+`
+
+table.appendChild(tr)
+
+}
+
+})
+
+}
+
+function markLearned(word){
+
+let learned = JSON.parse(localStorage.getItem("learnedWords") || "[]")
+
+if(!learned.includes(word)){
+
+learned.push(word)
+
+localStorage.setItem("learnedWords", JSON.stringify(learned))
+
+}
+
+}
+
+</script>
 
 </body>
+
 </html>
