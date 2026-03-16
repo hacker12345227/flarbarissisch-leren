@@ -1,6 +1,6 @@
-/*
+/* 
 Hoofdstukken voor de cursus.
-Alle woorden hier moeten ook bestaan in dictionary.json
+De woorden hier moeten ook bestaan in dictionary.json
 */
 
 const chapters = [
@@ -78,18 +78,18 @@ words: [
 ]
 
 /* ---------------- */
-/* HELPER FUNCTIES */
+/* HOOFDSTUK OPHALEN */
 /* ---------------- */
-
-/* hoofdstuk ophalen */
 
 function getChapter(id){
 
-return chapters.find(c => c.id == id)
+return chapters.find(ch => ch.id == id)
 
 }
 
-/* woorden van hoofdstuk */
+/* ---------------- */
+/* WOORDEN VAN HOOFDSTUK */
+/* ---------------- */
 
 function getChapterWords(id){
 
@@ -98,5 +98,57 @@ const chapter = getChapter(id)
 if(!chapter) return []
 
 return chapter.words
+
+}
+
+/* ---------------- */
+/* CONTROLE: BESTAAT WOORD IN DICTIONARY */
+/* ---------------- */
+
+function wordExists(word){
+
+if(!window.dictionary) return false
+
+return dictionary[word] !== undefined
+
+}
+
+/* ---------------- */
+/* FILTER WOORDEN DIE BESTAAN */
+/* ---------------- */
+
+function getValidChapterWords(id){
+
+const words = getChapterWords(id)
+
+return words.filter(word => wordExists(word))
+
+}
+
+/* ---------------- */
+/* VOLGENDE HOOFDSTUK */
+/* ---------------- */
+
+function getNextChapter(id){
+
+const index = chapters.findIndex(ch => ch.id == id)
+
+if(index === -1) return null
+
+return chapters[index + 1] || null
+
+}
+
+/* ---------------- */
+/* VORIGE HOOFDSTUK */
+/* ---------------- */
+
+function getPrevChapter(id){
+
+const index = chapters.findIndex(ch => ch.id == id)
+
+if(index === -1) return null
+
+return chapters[index - 1] || null
 
 }
