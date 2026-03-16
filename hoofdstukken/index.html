@@ -2,40 +2,46 @@
 <html lang="nl">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Hoofdstukken</title>
 
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../favicon.png">
-
 </head>
 
 <body>
 
-<header>
+<div class="page-shell">
 
-<h1>📚 Hoofdstukken</h1>
+<header class="topbar">
 
-<nav>
+<div class="brand">
+<div class="brand-badge">📚</div>
 
-<a href="../">Home</a>
-<a href="../hoofdstukken/">Hoofdstukken</a>
-<a href="../flashcards/">Flashcards</a>
-<a href="../quiz/">Quiz</a>
-<a href="../grammatica/">Grammatica</a>
+<div>
+<h1>Hoofdstukken</h1>
+<p>Leer woorden per onderwerp</p>
+</div>
+</div>
 
+<nav class="nav">
+<a class="nav-link" href="../">Home</a>
+<a class="nav-link active" href="../hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link" href="../flashcards/">Flashcards</a>
+<a class="nav-link" href="../quiz/">Quiz</a>
+<a class="nav-link" href="../grammatica/">Grammatica</a>
 </nav>
 
 </header>
 
-<main>
+<main class="container">
 
-<div id="chaptersContainer" class="grid"></div>
+<div id="chaptersContainer" class="home-grid"></div>
 
 </main>
+
+</div>
 
 <script src="../js/chapters.js"></script>
 
@@ -47,22 +53,14 @@ chapters.forEach(ch => {
 
 const card = document.createElement("div")
 
-card.className = "chapterCard"
+card.className = "feature card"
 
 card.innerHTML = `
-
-<h2>Hoofdstuk ${ch.id}</h2>
-
-<h3>${ch.title}</h3>
-
-<p>${ch.description}</p>
-
-<p>${ch.words.length} woorden</p>
-
-<a class="startBtn" href="../les/?chapter=${ch.id}">
-Start les →
+<h3>Hoofdstuk ${ch.id}</h3>
+<p>${ch.title}</p>
+<a class="text-link" href="../les/?chapter=${ch.id}">
+Start →
 </a>
-
 `
 
 container.appendChild(card)
@@ -72,5 +70,4 @@ container.appendChild(card)
 </script>
 
 </body>
-
 </html>
