@@ -1,6 +1,6 @@
-/* 
-Hoofdstukken voor de lessen.
-De woorden hier moeten ook bestaan in de dictionary.json
+/*
+Hoofdstukken voor de cursus.
+Alle woorden hier moeten ook bestaan in dictionary.json
 */
 
 const chapters = [
@@ -8,7 +8,7 @@ const chapters = [
 {
 id: 1,
 title: "Voorstellen",
-description: "Basiswoorden om jezelf voor te stellen",
+description: "Leer jezelf voorstellen",
 
 words: [
 "ik",
@@ -45,7 +45,7 @@ words: [
 {
 id: 3,
 title: "Werkwoorden",
-description: "Veelgebruikte werkwoorden",
+description: "Belangrijke werkwoorden",
 
 words: [
 "gaan",
@@ -61,7 +61,7 @@ words: [
 {
 id: 4,
 title: "Basiswoorden",
-description: "Algemene woorden",
+description: "Veelgebruikte woorden",
 
 words: [
 "ja",
@@ -76,3 +76,27 @@ words: [
 }
 
 ]
+
+/* ---------------- */
+/* HELPER FUNCTIES */
+/* ---------------- */
+
+/* hoofdstuk ophalen */
+
+function getChapter(id){
+
+return chapters.find(c => c.id == id)
+
+}
+
+/* woorden van hoofdstuk */
+
+function getChapterWords(id){
+
+const chapter = getChapter(id)
+
+if(!chapter) return []
+
+return chapter.words
+
+}
