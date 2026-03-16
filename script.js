@@ -1,32 +1,50 @@
-const dictURL =
+const DICTIONARY_URL =
 "https://www.translate.straykids.nl/dictionary.json"
 
 let dictionary={}
 let entries=[]
 
-fetch(dictURL)
-.then(res=>res.json())
-.then(data=>{
+async function loadDictionary(){
 
-dictionary=data
+try{
+
+const res=await fetch(DICTIONARY_URL)
+dictionary=await res.json()
 
 entries=Object.entries(dictionary)
 
+initPage()
+
+}catch(err){
+
+console.error("Dictionary kon niet laden",err)
+
+}
+
+}
+
+function initPage(){
+
 loadChapters()
 loadLesson()
-startQuiz()
+initFlashcards()
+initQuiz()
 
-})
+}
+
+/* ---------------- */
+/* HOOFDSTUKKEN */
+/* ---------------- */
 
 function loadChapters(){
 
-let container=document.getElementById("chapters")
+const container=document.getElementById("chapters")
 
 if(!container) return
 
 chapters.forEach(ch=>{
 
-let div=document.createElement("div")
+const div=document.createElement("div")
 
 div.className="card"
 
@@ -34,7 +52,7 @@ div.innerHTML=`
 
 <h2>Hoofdstuk ${ch.id}</h2>
 <p>${ch.title}</p>
-<a href="les.html?chapter=${ch.id}">Start</a>
+<a href="les.html?chapter=${ch.id}">Start les</a>
 
 `
 
@@ -44,28 +62,32 @@ container.appendChild(div)
 
 }
 
+/* ---------------- */
+/* LES PAGINA */
+/* ---------------- */
+
 function loadLesson(){
 
-let table=document.getElementById("lessonTable")
+const table=document.getElementById("lessonTable")
 
 if(!table) return
 
-let params=new URLSearchParams(location.search)
+const params=new URLSearchParams(location.search)
 
-let id=params.get("chapter")
+const id=params.get("chapter")
 
-let chapter=chapters.find(c=>c.id==id)
+const chapter=chapters.find(c=>c.id==id)
 
 if(!chapter) return
 
 document.getElementById("title").innerText=
-"Hoofdstuk "+chapter.id+" - "+chapter.title
+`Hoofdstuk ${chapter.id} – ${chapter.title}`
 
 chapter.words.forEach(word=>{
 
 if(dictionary[word]){
 
-let tr=document.createElement("tr")
+const tr=document.createElement("tr")
 
 tr.innerHTML=`
 
@@ -83,9 +105,13 @@ table.appendChild(tr)
 
 }
 
+/* ---------------- */
+/* AUDIO */
+/* ---------------- */
+
 function speak(text){
 
-let utter=new SpeechSynthesisUtterance(text)
+const utter=new SpeechSynthesisUtterance(text)
 
 utter.lang="nl-NL"
 
@@ -93,9 +119,77 @@ speechSynthesis.speak(utter)
 
 }
 
-function startQuiz(){
+/* ---------------- */
+/* FLASHCARDS */
+/* ---------------- */
 
-let question=document.getElementById("question")
+let flashIndex=0
+
+function initFlashcards(){
+
+const front=document.getElementById("front")
+
+if(!front) return
+
+nextCard()
+
+}
+
+function nextCard(){
+
+const front=document.getElementById("front")
+const back=document.getElementById("back")
+
+if(!front) return
+
+const [nl,flar]=entries[flashIndex]
+
+front.innerText=nl
+back.innerText=""
+
+back.dataset.word=flar
+
+flashIndex++
+
+if(flashIndex>=entries.length) flashIndex=0
+
+}
+
+function flip(){
+
+const back=document.getElementById("back")
+
+if(back.innerText===""){
+
+back.innerText=back.dataset.word
+
+}else{
+
+back.innerText=""
+
+}
+
+}
+
+function speakWord(){
+
+const back=document.getElementById("back")
+
+if(back.dataset.word){
+
+speak(back.dataset.word)
+
+}
+
+}
+
+/* ---------------- */
+/* QUIZ */
+/* ---------------- */
+
+function initQuiz(){
+
+const question=document.getElementById("question")
 
 if(!question) return
 
@@ -105,28 +199,28 @@ nextQuestion()
 
 function nextQuestion(){
 
-let keys=Object.keys(dictionary)
+const keys=Object.keys(dictionary)
 
-let correct=keys[Math.floor(Math.random()*keys.length)]
+const correct=keys[Math.floor(Math.random()*keys.length)]
 
-let flar=dictionary[correct]
+const flar=dictionary[correct]
 
-question.innerText=
-`Wat betekent "${flar}"?`
+const question=document.getElementById("question")
+const answers=document.getElementById("answers")
+const result=document.getElementById("result")
 
-let answers=document.getElementById("answers")
+question.innerText=`Wat betekent "${flar}"?`
 
 answers.innerHTML=""
+result.innerText=""
 
 let options=[correct]
 
 while(options.length<4){
 
-let r=keys[Math.floor(Math.random()*keys.length)]
+const rand=keys[Math.floor(Math.random()*keys.length)]
 
-if(!options.includes(r)){
-options.push(r)
-}
+if(!options.includes(rand)) options.push(rand)
 
 }
 
@@ -134,7 +228,7 @@ options.sort(()=>Math.random()-0.5)
 
 options.forEach(opt=>{
 
-let btn=document.createElement("button")
+const btn=document.createElement("button")
 
 btn.innerText=opt
 
@@ -142,11 +236,11 @@ btn.onclick=()=>{
 
 if(opt===correct){
 
-document.getElementById("result").innerText="✅ Goed"
+result.innerText="✅ Goed!"
 
 }else{
 
-document.getElementById("result").innerText="❌ Fout"
+result.innerText=`❌ Fout (goed: ${correct})`
 
 }
 
@@ -159,3 +253,7 @@ answers.appendChild(btn)
 })
 
 }
+
+/* ---------------- */
+
+loadDictionary()
