@@ -2,12 +2,15 @@
 <html lang="nl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Flashcards</title>
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
 </head>
 
 <body>
@@ -17,20 +20,24 @@
 <header class="topbar">
 
 <div class="brand">
+
 <div class="brand-badge">🗂</div>
 
 <div>
 <h1>Flashcards</h1>
-<p>Leer woorden</p>
+<p>Oefen woorden</p>
 </div>
+
 </div>
 
 <nav class="nav">
+
 <a class="nav-link" href="../">Home</a>
 <a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
 <a class="nav-link active" href="../flashcards/">Flashcards</a>
 <a class="nav-link" href="../quiz/">Quiz</a>
 <a class="nav-link" href="../grammatica/">Grammatica</a>
+
 </nav>
 
 </header>
@@ -42,13 +49,19 @@
 <div class="flashcard-inner" id="flashcardInner">
 
 <div class="flashcard-face">
+
 <span class="flashcard-label">Nederlands</span>
+
 <h2 id="front">...</h2>
+
 </div>
 
 <div class="flashcard-face flashcard-back">
+
 <span class="flashcard-label">Flarbarissisch</span>
+
 <h2 id="back">...</h2>
+
 </div>
 
 </div>
@@ -56,8 +69,15 @@
 </button>
 
 <div class="flashcard-actions">
-<button class="primary-btn" onclick="nextCard()">Volgende</button>
-<button class="speak-btn" onclick="speakWord()">🔊</button>
+
+<button class="primary-btn" onclick="nextCard()">
+Volgende
+</button>
+
+<button class="speak-btn" onclick="speakWord()">
+🔊 Uitspraak
+</button>
+
 </div>
 
 </main>
@@ -66,5 +86,28 @@
 
 <script src="../js/script.js"></script>
 
+<script>
+
+/* wachten tot dictionary geladen is */
+
+function waitForDictionary(){
+
+if(!window.entries || entries.length === 0){
+
+setTimeout(waitForDictionary,100)
+
+return
+
+}
+
+initFlashcards()
+
+}
+
+waitForDictionary()
+
+</script>
+
 </body>
+
 </html>
