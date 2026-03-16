@@ -1,92 +1,178 @@
-const DICTIONARY_URL =
-"https://www.translate.straykids.nl/dictionary.json"
+<!DOCTYPE html>
+<html lang="nl">
 
-window.dictionary = {}
-window.entries = []
+<head>
 
-/* ---------------- */
-/* LOAD DICTIONARY */
-/* ---------------- */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-async function loadDictionary(){
+<title>Flashcards</title>
 
-try{
+<link rel="stylesheet" href="../css/style.css">
 
-const res = await fetch(DICTIONARY_URL)
+</head>
 
-window.dictionary = await res.json()
+<body>
 
-window.entries = shuffleArray(
-Object.entries(dictionary)
-)
+<div class="page-shell">
 
-console.log("Dictionary geladen:", entries.length)
+<header class="topbar">
 
-}catch(err){
+<div class="brand">
 
-console.error("Dictionary kon niet laden", err)
+<div class="brand-badge">🗂</div>
+
+<div>
+<h1>Flashcards</h1>
+<p>Oefen woorden</p>
+</div>
+
+</div>
+
+<nav class="nav">
+
+<a class="nav-link" href="../">Home</a>
+<a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link active" href="../flashcards/">Flashcards</a>
+<a class="nav-link" href="../quiz/">Quiz</a>
+<a class="nav-link" href="../grammatica/">Grammatica</a>
+
+</nav>
+
+</header>
+
+<main class="container flashcard-page">
+
+<button class="flashcard" id="flashcard">
+
+<div class="flashcard-inner" id="flashcardInner">
+
+<div class="flashcard-face">
+
+<span class="flashcard-label">Nederlands</span>
+<h2 id="front">...</h2>
+
+</div>
+
+<div class="flashcard-face flashcard-back">
+
+<span class="flashcard-label">Flarbarissisch</span>
+<h2 id="back">...</h2>
+
+</div>
+
+</div>
+
+</button>
+
+<div class="flashcard-actions">
+
+<button class="primary-btn" onclick="nextCard()">
+Volgende
+</button>
+
+<button class="speak-btn" onclick="speakWord()">
+🔊
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../js/script.js"></script>
+
+<script>
+
+let flashIndex = 0
+let currentWord = ""
+let currentFlar = ""
+
+function waitDictionary(){
+
+if(!window.entries || entries.length === 0){
+
+setTimeout(waitDictionary,100)
+
+return
 
 }
 
-}
-
-/* ---------------- */
-/* SHUFFLE */
-/* ---------------- */
-
-function shuffleArray(array){
-
-for(let i = array.length - 1; i > 0; i--){
-
-const j = Math.floor(Math.random() * (i + 1))
-
-[array[i], array[j]] = [array[j], array[i]]
+showCard()
 
 }
 
-return array
+function showCard(){
+
+const front =
+document.getElementById("front")
+
+const back =
+document.getElementById("back")
+
+const card =
+document.getElementById("flashcard")
+
+const [nl,flar] = entries[flashIndex]
+
+currentWord = nl
+currentFlar = flar
+
+front.innerText = nl
+back.innerText = ""
+
+card.classList.remove("is-flipped")
 
 }
 
-/* ---------------- */
-/* AUDIO */
-/* ---------------- */
+function flipCard(){
 
-function speak(text){
+const card =
+document.getElementById("flashcard")
 
-if(!text) return
+const back =
+document.getElementById("back")
 
-const utter = new SpeechSynthesisUtterance(text)
+if(back.innerText === ""){
 
-utter.lang = "nl-NL"
-
-speechSynthesis.cancel()
-speechSynthesis.speak(utter)
+back.innerText = currentFlar
 
 }
 
-/* ---------------- */
-/* WORD LEARNED */
-/* ---------------- */
-
-function markLearned(word){
-
-let learned =
-JSON.parse(localStorage.getItem("learnedWords") || "[]")
-
-if(!learned.includes(word)){
-
-learned.push(word)
-
-localStorage.setItem(
-"learnedWords",
-JSON.stringify(learned)
-)
+card.classList.toggle("is-flipped")
 
 }
 
+function nextCard(){
+
+flashIndex++
+
+if(flashIndex >= entries.length){
+
+entries = shuffleArray(entries)
+flashIndex = 0
+
 }
 
-/* ---------------- */
+showCard()
 
-loadDictionary()
+}
+
+function speakWord(){
+
+speak(currentFlar)
+
+}
+
+document
+.getElementById("flashcard")
+.addEventListener("click",flipCard)
+
+waitDictionary()
+
+</script>
+
+</body>
+
+</html>
