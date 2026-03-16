@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Flashcards</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🗂 Flashcards</h1>
+
+<nav>
+
+<a href="../">Home</a>
+<a href="../hoofdstukken/">Hoofdstukken</a>
+<a href="../flashcards/">Flashcards</a>
+<a href="../quiz/">Quiz</a>
+<a href="../grammatica/">Grammatica</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<div class="flashcard" id="flashcard">
+
+<p id="front">laden...</p>
+<p id="back"></p>
+
+</div>
+
+<div class="controls">
+
+<button onclick="flipCard()">Flip</button>
+<button onclick="nextCard()">Volgende</button>
+<button onclick="speakCard()">🔊</button>
+
+</div>
+
+</main>
+
+<script src="../js/script.js"></script>
+
+<script>
+
+let cardIndex = 0
+let currentWord = ""
+let currentFlar = ""
+
+function initFlashcards(){
+
+if(entries.length === 0) return
+
+showCard()
+
+}
+
+function showCard(){
+
+const front = document.getElementById("front")
+const back = document.getElementById("back")
+
+const [nl, flar] = entries[cardIndex]
+
+currentWord = nl
+currentFlar = flar
+
+front.innerText = nl
+back.innerText = ""
+
+}
+
+function flipCard(){
+
+const back = document.getElementById("back")
+
+if(back.innerText === ""){
+
+back.innerText = currentFlar
+
+}else{
+
+back.innerText = ""
+
+}
+
+}
+
+function nextCard(){
+
+cardIndex++
+
+if(cardIndex >= entries.length){
+
+cardIndex = 0
+
+}
+
+showCard()
+
+}
+
+function speakCard(){
+
+if(currentFlar){
+
+speak(currentFlar)
+
+}
+
+}
+
+/* wachten tot dictionary geladen is */
+
+setTimeout(initFlashcards,500)
+
+</script>
+
+</body>
+
+</html>
