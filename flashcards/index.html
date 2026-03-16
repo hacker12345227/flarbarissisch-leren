@@ -2,131 +2,69 @@
 <html lang="nl">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Flashcards</title>
 
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../favicon.png">
-
 </head>
 
 <body>
 
-<header>
+<div class="page-shell">
 
-<h1>🗂 Flashcards</h1>
+<header class="topbar">
 
-<nav>
+<div class="brand">
+<div class="brand-badge">🗂</div>
 
-<a href="../">Home</a>
-<a href="../hoofdstukken/">Hoofdstukken</a>
-<a href="../flashcards/">Flashcards</a>
-<a href="../quiz/">Quiz</a>
-<a href="../grammatica/">Grammatica</a>
+<div>
+<h1>Flashcards</h1>
+<p>Leer woorden</p>
+</div>
+</div>
 
+<nav class="nav">
+<a class="nav-link" href="../">Home</a>
+<a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link active" href="../flashcards/">Flashcards</a>
+<a class="nav-link" href="../quiz/">Quiz</a>
+<a class="nav-link" href="../grammatica/">Grammatica</a>
 </nav>
 
 </header>
 
-<main>
+<main class="container flashcard-page">
 
-<div class="flashcard" id="flashcard">
+<button class="flashcard" id="flashcard">
 
-<p id="front">laden...</p>
-<p id="back"></p>
+<div class="flashcard-inner" id="flashcardInner">
+
+<div class="flashcard-face">
+<span class="flashcard-label">Nederlands</span>
+<h2 id="front">...</h2>
+</div>
+
+<div class="flashcard-face flashcard-back">
+<span class="flashcard-label">Flarbarissisch</span>
+<h2 id="back">...</h2>
+</div>
 
 </div>
 
-<div class="controls">
+</button>
 
-<button onclick="flipCard()">Flip</button>
-<button onclick="nextCard()">Volgende</button>
-<button onclick="speakCard()">🔊</button>
-
+<div class="flashcard-actions">
+<button class="primary-btn" onclick="nextCard()">Volgende</button>
+<button class="speak-btn" onclick="speakWord()">🔊</button>
 </div>
 
 </main>
 
+</div>
+
 <script src="../js/script.js"></script>
 
-<script>
-
-let cardIndex = 0
-let currentWord = ""
-let currentFlar = ""
-
-function initFlashcards(){
-
-if(entries.length === 0) return
-
-showCard()
-
-}
-
-function showCard(){
-
-const front = document.getElementById("front")
-const back = document.getElementById("back")
-
-const [nl, flar] = entries[cardIndex]
-
-currentWord = nl
-currentFlar = flar
-
-front.innerText = nl
-back.innerText = ""
-
-}
-
-function flipCard(){
-
-const back = document.getElementById("back")
-
-if(back.innerText === ""){
-
-back.innerText = currentFlar
-
-}else{
-
-back.innerText = ""
-
-}
-
-}
-
-function nextCard(){
-
-cardIndex++
-
-if(cardIndex >= entries.length){
-
-cardIndex = 0
-
-}
-
-showCard()
-
-}
-
-function speakCard(){
-
-if(currentFlar){
-
-speak(currentFlar)
-
-}
-
-}
-
-/* wachten tot dictionary geladen is */
-
-setTimeout(initFlashcards,500)
-
-</script>
-
 </body>
-
 </html>
