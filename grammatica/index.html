@@ -2,12 +2,15 @@
 <html lang="nl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Grammatica</title>
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
 </head>
 
 <body>
@@ -17,20 +20,24 @@
 <header class="topbar">
 
 <div class="brand">
+
 <div class="brand-badge">📘</div>
 
 <div>
 <h1>Grammatica</h1>
-<p>Zinsopbouw</p>
+<p>Leer zinsopbouw van Flarbarissisch</p>
 </div>
+
 </div>
 
 <nav class="nav">
+
 <a class="nav-link" href="../">Home</a>
 <a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
 <a class="nav-link" href="../flashcards/">Flashcards</a>
 <a class="nav-link" href="../quiz/">Quiz</a>
 <a class="nav-link active" href="../grammatica/">Grammatica</a>
+
 </nav>
 
 </header>
@@ -39,15 +46,82 @@
 
 <section class="prose-card card">
 
+<h2>Zinsopbouw</h2>
+
+<p>
+De grammatica van Flarbarissisch is bijna hetzelfde als Nederlands.
+De volgorde blijft meestal:
+</p>
+
+<ul class="pretty-list">
+
+<li>Onderwerp</li>
+<li>Werkwoord</li>
+<li>Plaats / object</li>
+
+</ul>
+
+</section>
+
+
+<section class="prose-card card">
+
 <h2>Voorbeeld zin</h2>
 
 <div class="example-box">
 
 <p><b>Nederlands</b></p>
-<p>ik ga naar huis</p>
+
+<p id="nlExample">
+ik ga naar huis
+</p>
+
+<button class="speak-btn"
+onclick="speak('ik ga naar huis')">
+🔊 Uitspraak
+</button>
+
+</div>
+
+<div class="example-box">
 
 <p><b>Flarbarissisch</b></p>
-<p>sloorkraim klutklair susnir greikspook</p>
+
+<p id="flarExample">
+sloorkraim klutklair susnir greikspook
+</p>
+
+<button class="speak-btn"
+onclick="speak('sloorkraim klutklair susnir greikspook')">
+🔊 Uitspraak
+</button>
+
+</div>
+
+</section>
+
+
+<section class="prose-card card">
+
+<h2>Extra voorbeelden</h2>
+
+<div class="example-box">
+
+<p><b>Nederlands</b></p>
+<p>ik zie een vriend</p>
+
+<p><b>Flarbarissisch</b></p>
+<p>sloorkraim snovrik blarfrin</p>
+
+</div>
+
+<div class="example-box">
+
+<p><b>Nederlands</b></p>
+<p>wij gaan naar school</p>
+
+<p><b>Flarbarissisch</b></p>
+<p>klurvain klutklair susnir blavrik</p>
 
 </div>
 
@@ -57,5 +131,8 @@
 
 </div>
 
+<script src="../js/script.js"></script>
+
 </body>
+
 </html>
