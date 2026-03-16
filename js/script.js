@@ -1,8 +1,8 @@
 const DICTIONARY_URL =
 "https://www.translate.straykids.nl/dictionary.json"
 
-let dictionary = {}
-let entries = []
+window.dictionary = {}
+window.entries = []
 
 /* ---------------- */
 /* LOAD DICTIONARY */
@@ -14,11 +14,13 @@ try{
 
 const res = await fetch(DICTIONARY_URL)
 
-dictionary = await res.json()
+window.dictionary = await res.json()
 
-entries = Object.entries(dictionary)
+window.entries = shuffleArray(
+Object.entries(dictionary)
+)
 
-initPage()
+console.log("Dictionary geladen:", entries.length)
 
 }catch(err){
 
@@ -29,36 +31,20 @@ console.error("Dictionary kon niet laden", err)
 }
 
 /* ---------------- */
-/* INIT PAGE */
+/* SHUFFLE */
 /* ---------------- */
 
-function initPage(){
+function shuffleArray(array){
 
-updateStats()
+for(let i = array.length - 1; i > 0; i--){
 
-initFlashcards()
+const j = Math.floor(Math.random() * (i + 1))
 
-initQuiz()
+[array[i], array[j]] = [array[j], array[i]]
 
 }
 
-/* ---------------- */
-/* STATS */
-/* ---------------- */
-
-function updateStats(){
-
-const streak = localStorage.getItem("streak") || 0
-const learned = JSON.parse(localStorage.getItem("learnedWords") || "[]").length
-const quizScore = localStorage.getItem("quizScore") || 0
-
-const streakEl = document.getElementById("streak")
-const learnedEl = document.getElementById("learned")
-const quizEl = document.getElementById("quizScore")
-
-if(streakEl) streakEl.innerText = streak
-if(learnedEl) learnedEl.innerText = learned
-if(quizEl) quizEl.innerText = quizScore
+return array
 
 }
 
@@ -74,206 +60,30 @@ const utter = new SpeechSynthesisUtterance(text)
 
 utter.lang = "nl-NL"
 
+speechSynthesis.cancel()
 speechSynthesis.speak(utter)
 
 }
 
 /* ---------------- */
-/* FLASHCARDS */
-/* ---------------- */
-
-let flashIndex = 0
-let currentWord = ""
-let currentFlar = ""
-
-function initFlashcards(){
-
-const front = document.getElementById("front")
-
-if(!front || entries.length === 0) return
-
-showCard()
-
-const card = document.getElementById("flashcard")
-
-if(card){
-
-card.addEventListener("click", flipCard)
-
-}
-
-}
-
-function showCard(){
-
-const front = document.getElementById("front")
-const back = document.getElementById("back")
-
-if(!front || !back) return
-
-const [nl, flar] = entries[flashIndex]
-
-currentWord = nl
-currentFlar = flar
-
-front.innerText = nl
-back.innerText = ""
-
-}
-
-function flipCard(){
-
-const card = document.getElementById("flashcard")
-
-if(!card) return
-
-card.classList.toggle("is-flipped")
-
-const back = document.getElementById("back")
-
-if(back && back.innerText === ""){
-
-back.innerText = currentFlar
-
-}
-
-}
-
-function nextCard(){
-
-flashIndex++
-
-if(flashIndex >= entries.length){
-
-flashIndex = 0
-
-}
-
-const card = document.getElementById("flashcard")
-
-if(card){
-
-card.classList.remove("is-flipped")
-
-}
-
-showCard()
-
-}
-
-function speakWord(){
-
-if(currentFlar){
-
-speak(currentFlar)
-
-}
-
-}
-
-/* ---------------- */
-/* QUIZ */
-/* ---------------- */
-
-let score = 0
-
-function initQuiz(){
-
-const question = document.getElementById("question")
-
-if(!question) return
-
-nextQuestion()
-
-}
-
-function nextQuestion(){
-
-const keys = Object.keys(dictionary)
-
-if(keys.length === 0) return
-
-const correct = keys[Math.floor(Math.random()*keys.length)]
-
-const flar = dictionary[correct]
-
-const question = document.getElementById("question")
-const answers = document.getElementById("answers")
-const result = document.getElementById("result")
-
-if(question){
-
-question.innerText = `Wat betekent "${flar}"?`
-
-}
-
-if(!answers) return
-
-answers.innerHTML = ""
-
-let options = [correct]
-
-while(options.length < 4){
-
-let rand = keys[Math.floor(Math.random()*keys.length)]
-
-if(!options.includes(rand)) options.push(rand)
-
-}
-
-options.sort(()=>Math.random()-0.5)
-
-options.forEach(opt => {
-
-const btn = document.createElement("button")
-
-btn.className = "answer-btn"
-
-btn.innerText = opt
-
-btn.onclick = () => {
-
-if(opt === correct){
-
-if(result) result.innerText = "✅ Goed!"
-
-score++
-
-localStorage.setItem("quizScore", score)
-
-}else{
-
-if(result) result.innerText = `❌ Fout (goed: ${correct})`
-
-}
-
-setTimeout(nextQuestion,1000)
-
-}
-
-answers.appendChild(btn)
-
-})
-
-}
-
-/* ---------------- */
-/* LES PAGINA */
+/* WORD LEARNED */
 /* ---------------- */
 
 function markLearned(word){
 
-let learned = JSON.parse(localStorage.getItem("learnedWords") || "[]")
+let learned =
+JSON.parse(localStorage.getItem("learnedWords") || "[]")
 
 if(!learned.includes(word)){
 
 learned.push(word)
 
-localStorage.setItem("learnedWords", JSON.stringify(learned))
+localStorage.setItem(
+"learnedWords",
+JSON.stringify(learned)
+)
 
 }
-
-updateStats()
 
 }
 
