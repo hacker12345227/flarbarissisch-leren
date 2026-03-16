@@ -1,46 +1,101 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leer Flarbarissisch</title>
 
-<meta charset="UTF-8">
-<title>Leer Flarbarissisch</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
 
-<link rel="stylesheet" href="style.css">
+  <meta name="description" content="Leer Flarbarissisch met quizzen, flashcards en uitspraak." />
+  <meta property="og:title" content="Leer Flarbarissisch" />
+  <meta property="og:description" content="Leer Flarbarissisch met quizzen, flashcards en uitspraak." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./banner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="./banner.png" />
 
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🌸</div>
+        <div>
+          <h1>Leer Flarbarissisch</h1>
+          <p>Woorden, flashcards, quiz en voortgang</p>
+        </div>
+      </div>
 
-<header>
+      <nav class="nav">
+        <a href="./index.html" class="nav-link active">Home</a>
+        <a href="./woorden.html" class="nav-link">Woorden</a>
+        <a href="./flashcards.html" class="nav-link">Flashcards</a>
+        <a href="./quiz.html" class="nav-link">Quiz</a>
+        <a href="./grammatica.html" class="nav-link">Grammatica</a>
+      </nav>
+    </header>
 
-<h1>📚 Leer Flarbarissisch</h1>
+    <main class="container">
+      <section class="hero card">
+        <div class="hero-content">
+          <h2>Leer snel woorden en oefen dagelijks</h2>
+          <p>
+            De grammatica werkt hetzelfde als Nederlands. Je hoeft dus vooral de
+            woordenschat te leren en veel te oefenen.
+          </p>
 
-<nav>
+          <div class="hero-actions">
+            <a class="primary-btn" href="./flashcards.html">Start flashcards</a>
+            <a class="secondary-btn" href="./quiz.html">Doe een quiz</a>
+          </div>
+        </div>
 
-<a href="index.html">Home</a>
-<a href="woorden.html">Woorden</a>
-<a href="grammatica.html">Grammatica</a>
-<a href="quiz.html">Quiz</a>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Streak</span>
+            <span class="stat-value" id="streakValue">0 dagen</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Geleerd</span>
+            <span class="stat-value" id="learnedValue">0 woorden</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Quizscore</span>
+            <span class="stat-value" id="quizValue">0 goed</span>
+          </div>
+        </div>
+      </section>
 
-</nav>
+      <section class="home-grid">
+        <article class="feature card">
+          <h3>📖 Woordenlijst</h3>
+          <p>Blader en zoek door alle woorden uit de dictionary.</p>
+          <a class="text-link" href="./woorden.html">Open woordenlijst →</a>
+        </article>
 
-</header>
+        <article class="feature card">
+          <h3>🗂️ Flashcards</h3>
+          <p>Flip kaarten, luister naar de uitspraak en markeer woorden als geleerd.</p>
+          <a class="text-link" href="./flashcards.html">Open flashcards →</a>
+        </article>
 
-<main>
+        <article class="feature card">
+          <h3>🧠 Quiz</h3>
+          <p>Meerkeuzevragen die automatisch doorgaan naar de volgende vraag.</p>
+          <a class="text-link" href="./quiz.html">Start quiz →</a>
+        </article>
 
-<h2>Welkom</h2>
+        <article class="feature card">
+          <h3>📘 Grammatica</h3>
+          <p>De zinsbouw is gelijk aan het Nederlands, met voorbeelden.</p>
+          <a class="text-link" href="./grammatica.html">Lees grammatica →</a>
+        </article>
+      </section>
+    </main>
+  </div>
 
-<p>
-Hier kun je Flarbarissisch leren met woorden, uitleg en oefeningen.
-</p>
-
-<p>
-De grammatica werkt hetzelfde als Nederlands.
-Je hoeft dus vooral de woorden te leren.
-</p>
-
-</main>
-
+  <script src="./script.js"></script>
 </body>
 </html>
