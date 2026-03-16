@@ -1,13 +1,88 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Les</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
+</head>
+
+<body>
+
+<div class="page-shell">
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="brand-badge">📖</div>
+
+<div>
+<h1 id="lessonTitle">Les</h1>
+<p>Leer nieuwe woorden</p>
+</div>
+
+</div>
+
+<nav class="nav">
+
+<a class="nav-link" href="../">Home</a>
+<a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link" href="../flashcards/">Flashcards</a>
+<a class="nav-link" href="../quiz/">Quiz</a>
+<a class="nav-link" href="../grammatica/">Grammatica</a>
+
+</nav>
+
+</header>
+
+<main class="container">
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table class="word-table">
+
+<thead>
+
+<tr>
+<th>Nederlands</th>
+<th>Flarbarissisch</th>
+<th>Audio</th>
+<th>Geleerd</th>
+</tr>
+
+</thead>
+
+<tbody id="lessonWords"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
 <script src="../js/chapters.js"></script>
 <script src="../js/script.js"></script>
 
 <script>
 
-/* wacht tot dictionary geladen is */
+/* wachten tot dictionary geladen is */
 
 function waitForDictionary(){
 
-if(!window.entries || entries.length === 0){
+if(!window.dictionary || Object.keys(dictionary).length === 0){
 
 setTimeout(waitForDictionary,100)
 
@@ -18,6 +93,8 @@ return
 loadLesson()
 
 }
+
+/* laad les */
 
 function loadLesson(){
 
@@ -31,13 +108,20 @@ const chapter = getChapter(chapterId)
 
 if(!chapter) return
 
-const table = document.getElementById("lessonWords")
-
 const title = document.getElementById("lessonTitle")
 
 if(title){
-title.innerText = "Hoofdstuk " + chapter.id + " – " + chapter.title
+
+title.innerText =
+"Hoofdstuk " + chapter.id + " – " + chapter.title
+
 }
+
+const table = document.getElementById("lessonWords")
+
+if(!table) return
+
+table.innerHTML = ""
 
 chapter.words.forEach(word => {
 
@@ -52,13 +136,15 @@ tr.innerHTML = `
 <td>${dictionary[word]}</td>
 
 <td>
-<button onclick="speak('${dictionary[word]}')">
+<button class="icon-btn"
+onclick="speak('${dictionary[word]}')">
 🔊
 </button>
 </td>
 
 <td>
-<button onclick="markLearned('${word}')">
+<button class="icon-btn"
+onclick="markLearned('${word}')">
 ✔
 </button>
 </td>
@@ -71,26 +157,12 @@ table.appendChild(tr)
 
 }
 
-/* markeer woord als geleerd */
-
-function markLearned(word){
-
-let learned = JSON.parse(localStorage.getItem("learnedWords") || "[]")
-
-if(!learned.includes(word)){
-
-learned.push(word)
-
-localStorage.setItem("learnedWords", JSON.stringify(learned))
-
-}
-
-updateStats()
-
-}
-
 /* start */
 
 waitForDictionary()
 
 </script>
+
+</body>
+
+</html>
