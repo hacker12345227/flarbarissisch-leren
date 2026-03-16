@@ -2,135 +2,56 @@
 <html lang="nl">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Quiz</title>
 
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../favicon.png">
-
 </head>
 
 <body>
 
-<header>
+<div class="page-shell">
 
-<h1>🧠 Quiz</h1>
+<header class="topbar">
 
-<nav>
+<div class="brand">
+<div class="brand-badge">🧠</div>
 
-<a href="../">Home</a>
-<a href="../hoofdstukken/">Hoofdstukken</a>
-<a href="../flashcards/">Flashcards</a>
-<a href="../quiz/">Quiz</a>
-<a href="../grammatica/">Grammatica</a>
+<div>
+<h1>Quiz</h1>
+<p>Test je kennis</p>
+</div>
+</div>
 
+<nav class="nav">
+<a class="nav-link" href="../">Home</a>
+<a class="nav-link" href="../hoofdstukken/">Hoofdstukken</a>
+<a class="nav-link" href="../flashcards/">Flashcards</a>
+<a class="nav-link active" href="../quiz/">Quiz</a>
+<a class="nav-link" href="../grammatica/">Grammatica</a>
 </nav>
 
 </header>
 
-<main>
+<main class="container">
 
-<div class="quizCard">
+<section class="quiz-card card">
 
-<h2 id="question">laden...</h2>
+<h2 id="question">...</h2>
 
-<div id="answers"></div>
+<div id="answers" class="answers-grid"></div>
 
 <p id="result"></p>
 
-<p>Score: <span id="score">0</span></p>
-
-</div>
+</section>
 
 </main>
 
+</div>
+
 <script src="../js/script.js"></script>
 
-<script>
-
-let score = 0
-
-function initQuiz(){
-
-if(entries.length === 0) return
-
-nextQuestion()
-
-}
-
-function nextQuestion(){
-
-const keys = Object.keys(dictionary)
-
-const correct = keys[Math.floor(Math.random()*keys.length)]
-
-const flar = dictionary[correct]
-
-document.getElementById("question").innerText =
-`Wat betekent "${flar}"?`
-
-const answers = document.getElementById("answers")
-
-answers.innerHTML = ""
-
-let options = [correct]
-
-while(options.length < 4){
-
-let rand = keys[Math.floor(Math.random()*keys.length)]
-
-if(!options.includes(rand)){
-options.push(rand)
-}
-
-}
-
-options.sort(()=>Math.random()-0.5)
-
-options.forEach(opt => {
-
-const btn = document.createElement("button")
-
-btn.innerText = opt
-
-btn.onclick = () => {
-
-if(opt === correct){
-
-document.getElementById("result").innerText = "✅ Goed!"
-
-score++
-
-localStorage.setItem("quizScore", score)
-
-}else{
-
-document.getElementById("result").innerText =
-`❌ Fout (goed: ${correct})`
-
-}
-
-document.getElementById("score").innerText = score
-
-setTimeout(nextQuestion,1000)
-
-}
-
-answers.appendChild(btn)
-
-})
-
-}
-
-/* wachten tot dictionary geladen is */
-
-setTimeout(initQuiz,500)
-
-</script>
-
 </body>
-
 </html>
