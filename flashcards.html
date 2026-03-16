@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashcards | Leer Flarbarissisch</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🗂️</div>
+        <div>
+          <h1>Flashcards</h1>
+          <p>Leer woord voor woord</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./woorden.html" class="nav-link">Woorden</a>
+        <a href="./flashcards.html" class="nav-link active">Flashcards</a>
+        <a href="./quiz.html" class="nav-link">Quiz</a>
+        <a href="./grammatica.html" class="nav-link">Grammatica</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card flashcard-page">
+        <div class="flashcard-header">
+          <span class="mini-stat" id="flashcardCounter">0 / 0</span>
+          <span class="mini-stat" id="flashcardLearned">0 geleerd</span>
+        </div>
+
+        <button id="flashcard" class="flashcard" type="button">
+          <div class="flashcard-inner" id="flashcardInner">
+            <div class="flashcard-face flashcard-front">
+              <span class="flashcard-label">Nederlands</span>
+              <h2 id="flashcardFront">Laden...</h2>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <span class="flashcard-label">Flarbarissisch</span>
+              <h2 id="flashcardBack">...</h2>
+            </div>
+          </div>
+        </button>
+
+        <div class="flashcard-actions">
+          <button id="speakFlashBtn" class="speak-btn" type="button">🔊 Beluister</button>
+          <button id="markLearnedBtn" class="primary-btn" type="button">✅ Markeer als geleerd</button>
+          <button id="nextFlashBtn" class="secondary-btn" type="button">Volgende →</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
