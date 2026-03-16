@@ -2,12 +2,15 @@
 <html lang="nl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Hoofdstukken</title>
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="../favicon.png">
+
 </head>
 
 <body>
@@ -17,27 +20,31 @@
 <header class="topbar">
 
 <div class="brand">
+
 <div class="brand-badge">📚</div>
 
 <div>
 <h1>Hoofdstukken</h1>
-<p>Leer woorden per onderwerp</p>
+<p>Leer Flarbarissisch stap voor stap</p>
 </div>
+
 </div>
 
 <nav class="nav">
+
 <a class="nav-link" href="../">Home</a>
 <a class="nav-link active" href="../hoofdstukken/">Hoofdstukken</a>
 <a class="nav-link" href="../flashcards/">Flashcards</a>
 <a class="nav-link" href="../quiz/">Quiz</a>
 <a class="nav-link" href="../grammatica/">Grammatica</a>
+
 </nav>
 
 </header>
 
 <main class="container">
 
-<div id="chaptersContainer" class="home-grid"></div>
+<div class="home-grid" id="chaptersContainer"></div>
 
 </main>
 
@@ -47,7 +54,12 @@
 
 <script>
 
-const container = document.getElementById("chaptersContainer")
+/* container */
+
+const container =
+document.getElementById("chaptersContainer")
+
+/* hoofdstukken tonen */
 
 chapters.forEach(ch => {
 
@@ -56,11 +68,18 @@ const card = document.createElement("div")
 card.className = "feature card"
 
 card.innerHTML = `
+
 <h3>Hoofdstuk ${ch.id}</h3>
+
 <p>${ch.title}</p>
-<a class="text-link" href="../les/?chapter=${ch.id}">
-Start →
+
+<a class="primary-btn"
+href="../les/?chapter=${ch.id}">
+
+Start les →
+
 </a>
+
 `
 
 container.appendChild(card)
@@ -70,4 +89,5 @@ container.appendChild(card)
 </script>
 
 </body>
+
 </html>
