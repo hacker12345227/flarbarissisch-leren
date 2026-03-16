@@ -9,7 +9,6 @@
 <title>Flashcards</title>
 
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../favicon.png">
 
 </head>
 
@@ -51,7 +50,6 @@
 <div class="flashcard-face">
 
 <span class="flashcard-label">Nederlands</span>
-
 <h2 id="front">...</h2>
 
 </div>
@@ -59,7 +57,6 @@
 <div class="flashcard-face flashcard-back">
 
 <span class="flashcard-label">Flarbarissisch</span>
-
 <h2 id="back">...</h2>
 
 </div>
@@ -75,7 +72,7 @@ Volgende
 </button>
 
 <button class="speak-btn" onclick="speakWord()">
-🔊 Uitspraak
+🔊
 </button>
 
 </div>
@@ -88,23 +85,91 @@ Volgende
 
 <script>
 
-/* wachten tot dictionary geladen is */
+let flashIndex = 0
+let currentWord = ""
+let currentFlar = ""
 
-function waitForDictionary(){
+function waitDictionary(){
 
 if(!window.entries || entries.length === 0){
 
-setTimeout(waitForDictionary,100)
+setTimeout(waitDictionary,100)
 
 return
 
 }
 
-initFlashcards()
+showCard()
 
 }
 
-waitForDictionary()
+function showCard(){
+
+const front =
+document.getElementById("front")
+
+const back =
+document.getElementById("back")
+
+const card =
+document.getElementById("flashcard")
+
+const [nl,flar] = entries[flashIndex]
+
+currentWord = nl
+currentFlar = flar
+
+front.innerText = nl
+back.innerText = ""
+
+card.classList.remove("is-flipped")
+
+}
+
+function flipCard(){
+
+const card =
+document.getElementById("flashcard")
+
+const back =
+document.getElementById("back")
+
+if(back.innerText === ""){
+
+back.innerText = currentFlar
+
+}
+
+card.classList.toggle("is-flipped")
+
+}
+
+function nextCard(){
+
+flashIndex++
+
+if(flashIndex >= entries.length){
+
+entries = shuffleArray(entries)
+flashIndex = 0
+
+}
+
+showCard()
+
+}
+
+function speakWord(){
+
+speak(currentFlar)
+
+}
+
+document
+.getElementById("flashcard")
+.addEventListener("click",flipCard)
+
+waitDictionary()
 
 </script>
 
